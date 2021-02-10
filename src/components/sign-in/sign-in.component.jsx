@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 import "./sign-in.styles.scss";
 import FormInput from "../form-input/form-input.component";
-import { signInWithGoogle } from "../../firebase/firebases.utils";
-
 import CustomButton from "../custom-button/custom-button.component";
+
+import { signInWithGoogle } from "../../firebase/firebases.utils";
 
 class SignIn extends Component {
   constructor(props) {
