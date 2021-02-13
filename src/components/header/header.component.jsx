@@ -6,6 +6,9 @@ import { auth } from "../../firebase/firebases.utils";
 
 import "./header.styles.scss";
 
+//Higher order component HOC which gives superpowers to access the user slice of THE BIG STATE
+import { connect } from "react-redux";
+
 const Header = ({ currentUser }) => (
   <div className="header">
     <Link className="logo-container" to="/">
@@ -33,4 +36,7 @@ const Header = ({ currentUser }) => (
   </div>
 );
 
-export default Header;
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+});
+export default connect(mapStateToProps)(Header);
