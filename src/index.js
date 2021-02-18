@@ -4,10 +4,13 @@ import "./index.css";
 
 //import from USER DEFINED JS
 import App from "./App";
-import store from "./redux/store";
+import { store, persistor } from "./redux/store";
 
 //for redux
 import { Provider } from "react-redux";
+
+//for session persistance
+import { PersistGate } from "redux-persist/integration/react";
 
 //for router
 import { BrowserRouter } from "react-router-dom";
@@ -18,7 +21,9 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
