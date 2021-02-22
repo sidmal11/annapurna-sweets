@@ -16,8 +16,10 @@ import { auth, createUserProfileDocument } from "./firebase/firebases.utils";
 
 //Higher order component HOC which gives superpowers to access the user slice of THE BIG STATE
 import { connect } from "react-redux";
+
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
@@ -37,9 +39,12 @@ class App extends React.Component {
             ...snapShot.data(),
           });
         });
-      } else {
-        setCurrentUser(userAuth);
       }
+      setCurrentUser(userAuth);
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
