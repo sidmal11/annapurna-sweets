@@ -27,19 +27,20 @@ class ShopPage extends React.Component {
     const { updateCollections } = this.props;
     const collectionRef = firestore.collection("collections");
 
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
-      async (snapshot) => {
-        const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-        updateCollections(collectionsMap);
+    // this.unsubscribeFromSnapshot = collectionRef.onSnapshot(
+    //   async (snapshot) => {
+    //     const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+    //     updateCollections(collectionsMap);
 
-        //here we know that it has been fetched from the backend so we will set loading as false
-        this.setState({ loading: false });
-      }
-    );
-    // collectionRef.get().then((snapshot) => {
-    //   const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
-    //   // updateCollections(collectionsMap);
-    // });
+    //     //here we know that it has been fetched from the backend so we will set loading as false
+    //     this.setState({ loading: false });
+    //   }
+    // );
+    collectionRef.get().then((snapshot) => {
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
+      updateCollections(collectionsMap);
+      this.setState({ loading: false });
+    });
   }
   render() {
     const { match } = this.props;
