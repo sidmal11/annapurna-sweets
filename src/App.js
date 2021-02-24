@@ -29,6 +29,8 @@ class App extends React.Component {
   componentDidMount() {
     const { setCurrentUser } = this.props;
 
+    /*
+    //user authentication code
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -41,11 +43,16 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-      // addCollectionAndDocuments(
-      //   "collections",
-      //   collectionsArray.map(({ title, items }) => ({ title, items }))
-      // );
+      remove slash star that you encounter below as well*/
+
+    // addCollectionAndDocuments(
+    //   "collections",
+    //   collectionsArray.map(({ title, items }) => ({ title, items }))
+    // );
+
+    /*
     });
+    */
   }
 
   componentWillUnmount() {

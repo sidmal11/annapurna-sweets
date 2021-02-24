@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import {
   SignInContainer,
@@ -10,6 +11,7 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { auth, signInWithGoogle } from "../../firebase/firebases.utils";
+import { googleSignInStart } from "../../redux/user/user.actions";
 
 class SignIn extends Component {
   constructor(props) {
@@ -40,6 +42,7 @@ class SignIn extends Component {
   };
 
   render() {
+    const { googleSignInStart } = this.props;
     return (
       <SignInContainer>
         <SignInTitle>I already have an account</SignInTitle>
@@ -66,7 +69,11 @@ class SignIn extends Component {
 
           <ButtonsBarContainer>
             <CustomButton type="submit">Sign In</CustomButton>
-            <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            <CustomButton
+              type="button"
+              onClick={googleSignInStart}
+              isGoogleSignIn
+            >
               Sign In With Google
             </CustomButton>
           </ButtonsBarContainer>
@@ -76,4 +83,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default connect(null, { googleSignInStart })(SignIn);
