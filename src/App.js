@@ -12,13 +12,12 @@ import SignInAndSignUp from "./pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 
 import Header from "./components/header/header.component";
 
-import { auth, createUserProfileDocument } from "./firebase/firebases.utils";
-
 //Higher order component HOC which gives superpowers to access the user slice of THE BIG STATE
 import { connect } from "react-redux";
 
-import { setCurrentUser } from "./redux/user/user.actions";
+// import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+import { checkUserSession } from "./redux/user/user.actions";
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -27,32 +26,8 @@ class App extends React.Component {
   //so this is subscribed to our firebase db and whatever changes might occur here it gets reflected over there as well
   //and this happens after componentDidMount
   componentDidMount() {
-    const { setCurrentUser } = this.props;
-
-    /*
-    //user authentication code
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot((snapShot) => {
-          setCurrentUser({
-            id: snapShot.id,
-            ...snapShot.data(),
-          });
-        });
-      }
-      setCurrentUser(userAuth);
-      remove slash star that you encounter below as well*/
-
-    // addCollectionAndDocuments(
-    //   "collections",
-    //   collectionsArray.map(({ title, items }) => ({ title, items }))
-    // );
-
-    /*
-    });
-    */
+    const { checkUserSession } = this.props;
+    checkUserSession();
   }
 
   componentWillUnmount() {
@@ -91,6 +66,5 @@ const mapStateToProps = createStructuredSelector({
 //   setCurrentUser : user => dispatch(setCurrentUser(user))
 // })
 
-export default connect(mapStateToProps, { setCurrentUser })(App);
-
+export default connect(mapStateToProps, { checkUserSession })(App);
 // export default connect(mapStateToProps, mapDispatchToProps)(App);
