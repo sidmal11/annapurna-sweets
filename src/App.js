@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
@@ -19,42 +19,50 @@ import { connect } from "react-redux";
 import { selectCurrentUser } from "./redux/user/user.selectors";
 import { checkUserSession } from "./redux/user/user.actions";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
+//we converted it class --> function due to useEffect hook
+const App = ({ checkUserSession, currentUser }) => {
+  // the below code is being handled in getCurrentUser in firebase.utils.js
+  // unsubscribeFromAuth = null;
+
+  useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession]);
+  //the above code means that checkUserSession will be fired once as we are blocking it by passing another array in which we pass checkUserSession
 
   //this says that the user is still logged in and firebase knows that.. PERSISTENCE
   //so this is subscribed to our firebase db and whatever changes might occur here it gets reflected over there as well
-  //and this happens after componentDidMount
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-    checkUserSession();
-  }
+  // //and this happens after componentDidMount
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;
+  //   checkUserSession();
+  // }
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  // the below code is being handled in getCurrentUser in firebase.utils.js
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
-  render() {
-    return (
-      <div>
-        <Header />
+  // render() {
+  return (
+    <div>
+      <Header />
 
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route path="/shop" component={ShopPage} />
-          <Route exact path="/checkout" component={CheckoutPage} />
-          <Route
-            exact
-            path="/signin"
-            render={() =>
-              this.props.currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
-            }
-          />
-        </Switch>
-      </div>
-    );
-  }
-}
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUp />
+          }
+        />
+      </Switch>
+    </div>
+  );
+  // }
+};
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
