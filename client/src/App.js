@@ -27,7 +27,7 @@ const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
   }, [checkUserSession]);
-  //the above code means that checkUserSession will be fired once as we are blocking it by passing another array in which we pass checkUserSession
+  //the above code means that checkUserSession will be fired once as the other array in which we pass the checkUserSession means that only when there is a change there it will be called
 
   //this says that the user is still logged in and firebase knows that.. PERSISTENCE
   //so this is subscribed to our firebase db and whatever changes might occur here it gets reflected over there as well
