@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { createStructuredSelector } from "reselect";
 
-import "./App.css";
+import { GlobalStyle } from "./global.styles";
 
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
@@ -45,8 +45,8 @@ const App = ({ checkUserSession, currentUser }) => {
   // render() {
   return (
     <div>
+      <GlobalStyle />
       <Header />
-
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
