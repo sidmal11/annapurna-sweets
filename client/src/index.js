@@ -17,7 +17,7 @@ import { BrowserRouter } from "react-router-dom";
 
 //misc
 import reportWebVitals from "./reportWebVitals";
-import * as serviceWorker from "./serviceWorker";
+import * as serviceWorker from "./serviceWorkerRegistration";
 
 ReactDOM.render(
   <Provider store={store}>
